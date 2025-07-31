@@ -1,4 +1,4 @@
-module ai-commiter
+module github.com/qrave1/AIcommit
 
 go 1.24.3
 

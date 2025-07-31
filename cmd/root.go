@@ -7,7 +7,7 @@ import (
 var cfgPath string
 
 var rootCmd = &cobra.Command{
-	Use:   "ai-commiter",
+	Use:   "AIcommit",
 	Short: "Generate git commit messages via LLM",
 	Run:   commitCmdRun,
 }

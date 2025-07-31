@@ -8,12 +8,12 @@ import (
 	"os/exec"
 	"strings"
 
-	"ai-commiter/config"
-
 	"github.com/spf13/cobra"
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/llms/openai"
 	"github.com/tmc/langchaingo/prompts"
+
+	"github.com/qrave1/AIcommit/config"
 )
 
 var ErrNoChangesFound = fmt.Errorf("no staged changes found")

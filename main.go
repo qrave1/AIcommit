@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"ai-commiter/cmd"
+	"github.com/qrave1/AIcommit/cmd"
 )
 
 func main() {
