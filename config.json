@@ -1,0 +1,13 @@
+{
+  "openai": {
+    "url": "https://api.proxyapi.ru/openai/v1",
+    "api_key_env": "PROXY_API_KEY",
+    "model": "gpt-4.1-nano",
+    "max_tokens": 64,
+    "temperature": 0.2
+  },
+  "style": {
+    "template": "You are a helpful assistant. Your response should contain only the commit message.Write a concise commit message (imperative, ≤{{.max_length}} chars) based on this diff:\n\n{{.diff}}",
+    "max_length": 50
+  }
+}

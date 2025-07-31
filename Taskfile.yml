@@ -1,0 +1,11 @@
+version: '3'
+
+vars:
+  APP_NAME: ai-commiter
+  OUTPUT: "./bin/{{.APP_NAME}}"
+
+tasks:
+  build:
+    desc: build the CLI binary
+    cmds:
+      - go build -o "{{.OUTPUT}}" ./main.go
