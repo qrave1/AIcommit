@@ -20,7 +20,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(
 		&cfgPath,
 		"config",
-		"config.json",
+		"~/aicommit_config.json",
 		"Path to config file",
 	)
 }
