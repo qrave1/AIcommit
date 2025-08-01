@@ -1,23 +1,22 @@
 package cmd
 
 import (
-	"github.com/qrave1/AIcommit/cmd/version"
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
+var RootCmd = &cobra.Command{
 	Use:     "AIcommit",
 	Short:   "Generate git commit messages via LLM",
-	Run:     commitCmdRun,
-	Version: version.Version,
+	Run:     CommitCmdRun,
+	Version: Version,
 }
 
 func Execute() error {
-	return rootCmd.Execute()
+	return RootCmd.Execute()
 }
 
 func init() {
-	flags := rootCmd.Flags()
+	flags := RootCmd.Flags()
 	flags.StringP(
 		"config",
 		"c",

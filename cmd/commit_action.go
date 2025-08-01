@@ -18,7 +18,7 @@ import (
 
 var ErrNoChangesFound = fmt.Errorf("no staged changes found")
 
-func commitCmdRun(cmd *cobra.Command, _ []string) {
+func CommitCmdRun(cmd *cobra.Command, _ []string) {
 	ctx := cmd.Context()
 
 	cfg, err := config.LoadJSONConfig(cmd.Flag("config").Value.String())

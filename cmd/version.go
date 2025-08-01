@@ -1,3 +1,3 @@
-package version
+package cmd
 
 var Version = "dev"
