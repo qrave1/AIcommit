@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"os"
+	"path/filepath"
 )
 
 type Config struct {
@@ -21,7 +22,12 @@ type Config struct {
 }
 
 func LoadJSONConfig(path string) (*Config, error) {
-	b, err := os.ReadFile(path)
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return nil, err
+	}
+
+	b, err := os.ReadFile(filepath.Join(homeDir, path))
 	if err != nil {
 		return nil, err
 	}

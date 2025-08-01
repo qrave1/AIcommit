@@ -1,15 +1,15 @@
 package cmd
 
 import (
+	"github.com/qrave1/AIcommit/cmd/version"
 	"github.com/spf13/cobra"
 )
 
-var cfgPath string
-
 var rootCmd = &cobra.Command{
-	Use:   "AIcommit",
-	Short: "Generate git commit messages via LLM",
-	Run:   commitCmdRun,
+	Use:     "AIcommit",
+	Short:   "Generate git commit messages via LLM",
+	Run:     commitCmdRun,
+	Version: version.Version,
 }
 
 func Execute() error {
@@ -17,10 +17,11 @@ func Execute() error {
 }
 
 func init() {
-	rootCmd.PersistentFlags().StringVar(
-		&cfgPath,
+	flags := rootCmd.Flags()
+	flags.StringP(
 		"config",
-		"~/aicommit_config.json",
+		"c",
+		"aicommit_config.json",
 		"Path to config file",
 	)
 }

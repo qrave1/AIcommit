@@ -2,10 +2,64 @@ version: '3'
 
 vars:
   APP_NAME: AIcommit
+  VERSION:
+    sh: cat VERSION
   OUTPUT: "./bin/{{.APP_NAME}}"
 
 tasks:
   build:
     desc: build the CLI binary
     cmds:
-      - go build -o "{{.OUTPUT}}" ./main.go
+      - echo "Building {{.APP_NAME}} version {{.VERSION}}..."
+      - go build -ldflags "-X 'main.version={{.VERSION}}'" -o "{{.OUTPUT}}" ./main.go
+
+  bump-patch:
+    desc: Bump patch version (X.Y.Z → X.Y.(Z+1))
+    cmds:
+      - |
+        version=$(cat VERSION)
+        major=$(echo "$version" | cut -d. -f1)
+        minor=$(echo "$version" | cut -d. -f2)
+        patch=$(echo "$version" | cut -d. -f3)
+        patch=$((patch + 1))
+        echo "$major.$minor.$patch" > VERSION
+        echo "🔼 Patch bumped: $major.$minor.$patch"
+
+  bump-minor:
+    desc: Bump minor version (X.Y.Z → X.(Y+1).0)
+    cmds:
+      - |
+        version=$(cat VERSION)
+        major=$(echo "$version" | cut -d. -f1)
+        minor=$(echo "$version" | cut -d. -f2)
+        minor=$((minor + 1))
+        echo "$major.$minor.0" > VERSION
+        echo "🔼 Minor bumped: $major.$minor.0"
+
+  bump-major:
+    desc: Bump major version (X.Y.Z → (X+1).0.0)
+    cmds:
+      - |
+        version=$(cat VERSION)
+        major=$(echo "$version" | cut -d. -f1)
+        major=$((major + 1))
+        echo "$major.0.0" > VERSION
+        echo "🔼 Major bumped: $major.0.0"
+
+  build-and-bump-patch:
+    desc: Build and bump patch version
+    deps: [ build ]
+    cmds:
+      - task: bump-patch
+
+  build-and-bump-minor:
+    desc: Build and bump minor version
+    deps: [ build ]
+    cmds:
+      - task: bump-minor
+
+  build-and-bump-major:
+    desc: Build and bump major version
+    deps: [ build ]
+    cmds:
+      - task: bump-major

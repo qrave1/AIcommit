@@ -21,7 +21,7 @@ var ErrNoChangesFound = fmt.Errorf("no staged changes found")
 func commitCmdRun(cmd *cobra.Command, _ []string) {
 	ctx := cmd.Context()
 
-	cfg, err := config.LoadJSONConfig(cfgPath)
+	cfg, err := config.LoadJSONConfig(cmd.Flag("config").Value.String())
 	if err != nil {
 		log.Fatal("failed to load json config:", err)
 	}
